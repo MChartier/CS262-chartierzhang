@@ -26,23 +26,17 @@ public class BankServer {
 	}
 
 	// establish communication with client
-	PritnWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-	BufferedReader in = 
-	    new BufferedReader(
-	    new InputStreamReader(
-            clientSocket.getInputStream()));
-	String inputLine, outputLine = null;
+	DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream(), true);
+	DataInputStream in = new DataInputStream(clientSocket.getInputStream());
 
 	// initiate conversation with client (one at a time for now)
 	BankProtocol bp = new BankProtocol();
+	BankMessage inputMessage, outputMessage;
 
 	do {
-	    outputLine = bp.processInput(inputLine);
-	    out.println(outputLine);
+	    outputMessage = bp.processInput(inputMessage);
+	    outputMessage.writeMessage(out);
 
-	    // if(outputLine.equals("Bye."))
-	    // 	break;
-
-	} while((inputLine = in.readLine()) != null);
+	} while((inputMessage = readMessage(in)) != null);
     }
 }
