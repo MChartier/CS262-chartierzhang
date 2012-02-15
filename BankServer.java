@@ -2,7 +2,7 @@ import java.io.*;
 import java.net.*;
 
 public class BankServer {
-    final static int portNumber = 80;
+    final static int portNumber = 2048;
 
     public static void main(String[] args) throws IOException {
 
