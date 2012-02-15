@@ -2,7 +2,7 @@ import java.io.*;
 import java.net.*;
 
 public class BankServer {
-    final static int portNumber = 401;
+    final static int portNumber = 80;
 
     public static void main(String[] args) throws IOException {
 
@@ -11,7 +11,7 @@ public class BankServer {
 	try {
 	    serverSocket = new ServerSocket(portNumber);
 	} catch (IOException e) {
-	    System.err.println("List on port: " + portNumber + " failed.");
+	    System.err.println("Listen on port: " + portNumber + " failed.");
 	    System.exit(-1);
 	}
 
