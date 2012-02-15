@@ -26,17 +26,16 @@ public class BankServer {
 	}
 
 	// establish communication with client
-	DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream(), true);
+	DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
 	DataInputStream in = new DataInputStream(clientSocket.getInputStream());
 
 	// initiate conversation with client (one at a time for now)
 	BankProtocol bp = new BankProtocol();
 	BankMessage inputMessage, outputMessage;
 
-	do {
+	while((inputMessage = BankMessage.readMessage(in)) != null) {
 	    outputMessage = bp.processInput(inputMessage);
 	    outputMessage.writeMessage(out);
-
-	} while((inputMessage = readMessage(in)) != null);
+	}
     }
 }

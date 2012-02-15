@@ -1,3 +1,5 @@
+import java.io.*;
+
 public class BankMessage {
     public int version;
     public int opcode;
@@ -9,6 +11,9 @@ public class BankMessage {
                        int opcode,
                        int messageId,
                        int[] parameters) {
+
+	if(parameters == null)
+	    parameters = new int[0];
 	this.version = version;
 	this.opcode = opcode;
 	this.packetLength = 8 + parameters.length * 4;
@@ -16,7 +21,7 @@ public class BankMessage {
 	this.parameters = parameters;
     }
 
-    public BankMessage readMessage(DataInputStream input) {
+    public static BankMessage readMessage(DataInputStream input) throws IOException {
 	int version = input.readByte();
 	int opcode = input.readByte();
 	int packetLength = input.readShort();
@@ -31,12 +36,11 @@ public class BankMessage {
 
 	return new BankMessage(version,
 			       opcode,
-			       packetLength,
 			       messageId,
 			       parameters);
     }
 
-    public void writeMessage(DataOutputStream output) {
+    public void writeMessage(DataOutputStream output) throws IOException {
 	output.writeByte(this.version);
 	output.writeByte(this.opcode);
 	output.writeShort(this.packetLength);
@@ -45,5 +49,7 @@ public class BankMessage {
 	for(int i = 0; i < parameters.length; i++) {
 	    output.writeInt(parameters[i]);
 	}
+
+	output.flush();
     }
 }
