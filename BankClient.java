@@ -1,0 +1,92 @@
+import java.io.*;
+import java.net.*;
+
+public class BankClient {
+	final static int portNumber = 401;
+	
+    public static void main(String[] args) 
+    		throws IOException, UnknownHostException, Exception {
+    
+    // check for hostname
+    if (args.length != 2) {
+    	System.out.println("Usage: java BankClient hostname");
+    	System.exit(1);
+    }
+    
+    String hostname = args[1];
+    	
+    	
+	// set up socket for network I/O
+	Socket clientSocket = null;
+	PrintWriter out = null;
+	BufferedReader in = null;
+	
+	try {
+	    clientSocket = new Socket(hostname, portNumber);
+		
+	    // establish communication with server
+		DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream(), true);
+		DataInputStream in = new DataInputStream(clientSocket.getInputStream());
+	} 
+	catch (UnknownHostException e) {
+		System.err.println("Invalid hostname");
+		System.exit(1);
+	}
+	catch (IOException e) {
+	    System.err.println("Couldn't get I/O for connection to host");
+	    System.exit(-1);
+	}
+
+	// display usage
+	this.usage();
+	
+	// set up command line input
+	BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
+	String userInput;
+	
+
+	// set up protocol to send/receive server messages
+	BankProtocol bp = new BankProtocol();
+	BankMessage inputMessage, outputMessage;
+	String responseMessage;
+	
+	// read user input and send to client server
+	while((userInput = stdIn.readLine()) != null) {
+	    try {
+	    	outputMessage = bp.processInput(userInput);
+		    outputMessage.writeMessage(out);
+		    inputMessage = BankMessage.readMessage(in);
+		    responseMessage = bp.receiveMessage(inputMessage);
+		    System.out.println(responseMessage);
+	    }
+	    catch (NoSuchElementException e){
+	    	this.usage();
+	    	
+	    }
+	    catch (InputMismatchException e) {
+	    	this.usage();
+	    }
+	}
+	
+	// clean up
+	out.close();
+	in.close();
+	stdIn.close();
+    clientSocket.close();
+
+    }	
+    
+    public static void usage(void) {
+    	System.out.println("Welcome to DistribCo Banking");
+    	System.out.println("Usage:");
+    	System.out.println("create initial_deposit_amount");
+    	System.out.println("getbalance account_number");
+    	System.out.println("deposit account_number amount");
+    	System.out.println("withdraw account_number amount");
+    	System.out.println("close account_number");
+    	System.out.println("------------------------------------");
+    	System.out.println("Please include all arguments and format amounts in whole dollars and cents (i.e 110.23)");
+    	
+    }
+    
+}
