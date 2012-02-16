@@ -100,7 +100,7 @@ public class BankServerProtocol {
 	    
 	    // SUCCESSFUL BALANCE CHECK
 	    else {
-		output = buildMessage(0x40);
+		output = buildMessage(0x40, balance[firstParam]);
 	    }
 	    break;
 
@@ -113,7 +113,7 @@ public class BankServerProtocol {
 	    // SUCCESSFUL ACCOUNT CLOSURE
 	    else {
 		accountState[firstParam] = false;
-		output = buildMessage(0x50);
+		output = buildMessage(0x50, firstParam);
 	    }
 
 	    break;

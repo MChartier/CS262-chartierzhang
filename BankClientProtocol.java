@@ -19,7 +19,6 @@ public class BankClientProtocol {
 
     int opcode = inputMessage.opcode;
 	int firstParam = inputMessage.parameters[0];
-        double balance;
         
 	switch (opcode) {
 	case CREATE:
@@ -38,7 +37,7 @@ public class BankClientProtocol {
 	case DEPOSIT:
 	case WITHDRAW:
 	    // SUCCESSFUL DEPOSIT OR WITHDRAW - RETURN BALANCE
-		balance = (double) firstParam / 100;
+		double balance = (double) (firstParam / 100);
 		output = String.format("Success: Your balance is now $%.2f",balance);
 		break;
 
@@ -62,9 +61,10 @@ public class BankClientProtocol {
 
 	case GETBALANCE:
 		// SUCCESSFUL BALANCE QUERY
-        balance = (double) firstParam / 100;
-		output = String.format("Your balance is $%.2f",  balance);
+        double bal = (double) (firstParam / 100);
+		output = String.format("Your balance is $%.2f",  bal);
 		break;
+            
 	case 0x42:
 		// UNABLE TO GET BALANCE - MISC ERROR
 		output = "Error: Unable to get balance";
@@ -146,21 +146,21 @@ public class BankClientProtocol {
                 switch(opcode) {
                     case CREATE:
                         System.out.println("How much for initial deposit?");
-                        parameters[0] = (int) stdIn.nextDouble() * 100;
+                        parameters[0] = (int) (stdIn.nextDouble() * 100);
                         break;
                         
                     case DEPOSIT:
                         System.out.println("Which account?");
                         parameters[0] = stdIn.nextInt();
                         System.out.println("How much?");
-                        parameters[1] = (int) stdIn.nextDouble() * 100;
+                        parameters[1] = (int) (stdIn.nextDouble() * 100);
                         break;
                         
                     case WITHDRAW:
                         System.out.println("Which account?");
                         parameters[0] = stdIn.nextInt();
                         System.out.println("How much?");
-                        parameters[1] = (int) stdIn.nextDouble() * 100;
+                        parameters[1] = (int) (stdIn.nextDouble() * 100);
                         break;
                         
                     case GETBALANCE:

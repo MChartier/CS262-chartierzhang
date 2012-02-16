@@ -52,17 +52,25 @@ public class BankClient {
 	String responseMessage;
 	
 	// read user input and send to client server
-	while((outputMessage = bp.makeMessage()) != null) {
-	    	//outputMessage = bp.makeMessage(userInput);
+	while(true) {
+        try {
+            outputMessage = bp.makeMessage();
             System.out.println("Sending message to server...");
             outputMessage.writeMessage(out);
             
             System.out.println("Awaiting reply from server...");
             inputMessage = BankMessage.readMessage(in);
-
+            
             responseMessage = bp.receiveMessage(inputMessage);
             System.out.println(responseMessage);
 
+        }
+        catch (InputMismatchException e) {
+            // yell at user
+            usage();
+        }
+	    	//outputMessage = bp.makeMessage(userInput);
+            
 	}
 	
 	// clean up
