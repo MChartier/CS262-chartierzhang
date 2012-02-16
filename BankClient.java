@@ -18,8 +18,6 @@ public class BankClient {
     	
 	// set up socket for network I/O
 	Socket clientSocket = null;
-	PrintWriter out = null;
-	BufferedReader in = null;
 	
 	try {
 	    clientSocket = new Socket(hostname, portNumber);
@@ -38,7 +36,7 @@ public class BankClient {
 	}
 
 	// display usage
-	this.usage();
+	usage();
 	
 	// set up command line input
 	BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
@@ -60,11 +58,11 @@ public class BankClient {
 		    System.out.println(responseMessage);
 	    }
 	    catch (NoSuchElementException e){
-	    	this.usage();
-	    	
+	    	usage();
+	    
 	    }
 	    catch (InputMismatchException e) {
-	    	this.usage();
+	    	usage();
 	    }
 	}
 	
@@ -76,7 +74,7 @@ public class BankClient {
 
     }	
     
-    public static void usage(void) {
+    public static void usage() {
     	System.out.println("Welcome to DistribCo Banking");
     	System.out.println("Usage:");
     	System.out.println("create initial_deposit_amount");

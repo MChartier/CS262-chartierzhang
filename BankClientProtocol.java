@@ -2,7 +2,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-public class BankProtocol {
+public class BankClientProtocol {
     private int PROTOCOL_VERSION = 1;
 
     private static final int CREATE = 0x10;
@@ -11,7 +11,7 @@ public class BankProtocol {
     private static final int GETBALANCE = 0x40;
     private static final int CLOSE = 0x50;
 
-    public BankProtocol() {
+    public BankClientProtocol() {
     }
 
     public String receiveMessage(BankMessage inputMessage) {
