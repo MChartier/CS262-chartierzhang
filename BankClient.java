@@ -52,8 +52,7 @@ public class BankClient {
 	String responseMessage;
 	
 	// read user input and send to client server
-	while((outputMessage = bp.makeMessage()) != null) {
-	    try {
+	while((outMessage = makeMessage()) != null) {
 	    	//outputMessage = bp.makeMessage(userInput);
             System.out.println("Sending message to server...");
             outputMessage.writeMessage(out);
@@ -63,10 +62,6 @@ public class BankClient {
 
             responseMessage = bp.receiveMessage(inputMessage);
             System.out.println(responseMessage);
-	    }
-	    catch (Exception e) {
-	    	//usage();
-	    }
 
 	}
 	
