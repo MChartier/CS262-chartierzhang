@@ -73,11 +73,6 @@ public class BankClient {
             
 	}
 	
-	// clean up
-	out.close();
-	in.close();
-	stdIn.close();
-	clientSocket.close();
     }	
     
     public static void welcome() {
