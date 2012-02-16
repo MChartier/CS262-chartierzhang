@@ -27,7 +27,7 @@ public class BankServerProtocol {
     public BankMessage processInput(BankMessage inputMessage) {
 	BankMessage output = null;
 
-        int opcode = inputMessage.opcode;
+    int opcode = inputMessage.opcode;
 
 	int firstParam = inputMessage.parameters[0];
 	int secondParam = inputMessage.parameters[1];

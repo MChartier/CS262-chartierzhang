@@ -55,8 +55,12 @@ public class BankClient {
 	while((userInput = stdIn.readLine()) != null) {
 	    try {
 	    	outputMessage = bp.processInput(userInput);
+            System.out.println("Sending message to server...");
             outputMessage.writeMessage(out);
+            
+            System.out.println("Awaiting reply from server...");
             inputMessage = BankMessage.readMessage(in);
+
             responseMessage = bp.receiveMessage(inputMessage);
             System.out.println(responseMessage);
 	    }
@@ -103,6 +107,7 @@ public class BankClient {
         System.out.println("    ~~~~~'   ____     __  /_O_/.\\_\\   \\~\\\\");
         System.out.println("_____________________________________________________");
    }
+    
    public static void usage() {
     	System.out.println("Usage:");
     	System.out.println("create initial_deposit_amount");

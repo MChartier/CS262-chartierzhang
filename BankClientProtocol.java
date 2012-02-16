@@ -88,7 +88,7 @@ public class BankClientProtocol {
 
     public BankMessage processInput(String userInput) 
     		throws InputMismatchException, NoSuchElementException {
-    	BankMessage output = null;
+    	/*BankMessage output = null;
 
     	// scan userInput string
     	Scanner sc = new Scanner(userInput);
@@ -127,15 +127,72 @@ public class BankClientProtocol {
     	}
     	else {
     		throw new InputMismatchException();
-    	} 
+    	} */
+                Scanner stdIn = new Scanner(System.in);
+                int uInput;
+                
+    
+                int[] opcodes = {CREATE, DEPOSIT, WITHDRAW, 
+                    GETBALANCE, CLOSE};
+                
+                System.out.println("1. Create account");
+                System.out.println("2. Deposit Money");
+                System.out.println("3. Withdraw Money");
+                System.out.println("4. Get Balance");
+                System.out.println("5. Close account");
+                
+                do {
+                    uInput = stdIn.nextInt();
+                } while(!(uInput >=1 && uInput <= 5));
+                
+                int opcode = opcodes[uInput - 1];
+                int[] parameters = null;
+                
+                // populate parameters list
+                switch(opcode) {
+                    case CREATE:
+                        System.out.println("How much for initial deposit?");
+                        parameters[0] = (int) stdIn.nextDouble() * 100;
+                        break;
+                        
+                    case DEPOSIT:
+                        System.out.println("Which account?");
+                        parameters[0] = stdIn.nextInt();
+                        System.out.println("How much?");
+                        parameters[1] = (int) stdIn.nextDouble() * 100;
+                        break;
+                        
+                    case WITHDRAW:
+                        System.out.println("Which account?");
+                        parameters[0] = stdIn.nextInt();
+                        System.out.println("How much?");
+                        parameters[1] = (int) stdIn.nextDouble() * 100;
+                        break;
+                        
+                    case GETBALANCE:
+                        System.out.println("Which account?");
+                        parameters[0] = stdIn.nextInt();
+                        break;
+                        
+                    case CLOSE:
+                        System.out.println("Which account?");
+                        parameters[0] = stdIn.nextInt();
+                        break;
+                        
+                    default:
+                        System.out.println("Invalid opcode. System failure.");
+                        System.exit(-1);
+                }
+
         
-        return output;
+                BankMessage output = buildMessage(opcode, parameters);
+                return output;
     }
 
 
 
     private BankMessage buildMessage(int opcode, int parameter[]) {
-	int[] parameters = new int[1];
+	int[] parameters = new int[2];
 	parameters[0] = parameter[0];
 	parameters[1] = parameter[1];
 
