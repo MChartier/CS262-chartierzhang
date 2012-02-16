@@ -143,7 +143,7 @@ public class BankClientProtocol {
 		int[] parameters = new int[2];
 		
 		// create a pattern only accepting positive numbers with at most 2 decimal places
-		Pattern dollar = new Pattern.compile("^\$?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}[0-9]{0,}(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$");
+	//	Pattern dollar = Pattern.compile("^\$?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}[0-9]{0,}(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$");
 		
 		// populate parameters list
 		switch(opcode) {
