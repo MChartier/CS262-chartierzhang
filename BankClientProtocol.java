@@ -38,7 +38,7 @@ public class BankClientProtocol {
 	case WITHDRAW:
 	    // SUCCESSFUL DEPOSIT OR WITHDRAW - RETURN BALANCE
 		double balance = (double) firstParam / 100;
-		output = new String.format("Success: Your balance is now $%.2f",balance);
+		output = String.format("Success: Your balance is now $%.2f",balance);
 		break;
 
 	case 0x21:
@@ -61,7 +61,7 @@ public class BankClientProtocol {
 
 	case GETBALANCE:
 		// SUCCESSFUL BALANCE QUERY
-		double balance = (double) firstParam / 100;
+        balance = (double) firstParam / 100;
 		output = String.format("Your balance is $%.2f",  balance);
 		break;
 	case 0x42:
@@ -79,6 +79,8 @@ public class BankClientProtocol {
 		break;
 
 	default:
+        System.out.println("We are sorry, the server is having difficulties.");
+        System.exit(2);
 	}
 
 	return output;
@@ -90,7 +92,7 @@ public class BankClientProtocol {
 
     	// scan userInput string
     	Scanner sc = new Scanner(userInput);
-    	Int parameters[];
+    	int parameters[] = new int[1];
     	
     	// try to find operation name
     	String opcode = sc.next();
@@ -116,7 +118,6 @@ public class BankClientProtocol {
     		// case GETBALANCE:
     		parameters[0] = sc.nextInt();
     		output = buildMessage(0x40, parameters[0]); 
-    	    break;
     	}
     	else if (opcode.equals("close")) {
     		// case CLOSE:
@@ -124,8 +125,10 @@ public class BankClientProtocol {
     		output = buildMessage(0x50, parameters[0]);
     	}
     	else {
-    		throw InputMismatchException;
+    		throw new InputMismatchException();
     	} 
+        
+        return output;
     }
 
 

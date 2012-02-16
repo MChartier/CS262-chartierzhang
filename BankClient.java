@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
 public class BankClient {
     final static int portNumber = 2048;
@@ -53,17 +54,15 @@ public class BankClient {
 	while((userInput = stdIn.readLine()) != null) {
 	    try {
 	    	outputMessage = bp.processInput(userInput);
-		outputMessage.writeMessage(out);
-		inputMessage = BankMessage.readMessage(in);
-		responseMessage = bp.receiveMessage(inputMessage);
-		System.out.println(responseMessage);
+            outputMessage.writeMessage(out);
+            inputMessage = BankMessage.readMessage(in);
+            responseMessage = bp.receiveMessage(inputMessage);
+            System.out.println(responseMessage);
 	    }
-	    catch (NoSuchElementException e) {
+	    catch (Exception e) {
 	    	usage();
 	    }
-	    catch (InputMismatchException e) {
-	    	usage();
-	    }
+
 	}
 	
 	// clean up
@@ -75,6 +74,34 @@ public class BankClient {
     
     public static void usage() {
     	System.out.println("Welcome to DistribCo Banking");
+        System.out.println("                              )");
+        System.out.println("                         )   __    (");
+        System.out.println("                        __  (~(    __");
+        System.out.println("                       (~(   \\O\\   )~)");
+        System.out.println("                        )O)   )_) (O(");
+        System.out.println("                       (_(__ (     )_) )");
+        System.out.println("                          )~)__      __");
+        System.out.println("                         /O/ )~)  ) (~(");
+        System.out.println("                        (_( (O(  __  \\O\\\\");
+        System.out.println("                        __)  )_)(~(   \\_\\\\");
+        System.out.println("                       (~(       )O)   (            ________");
+        System.out.println("                 _      \\O\\   __(_(    __        _-'        `-_");
+        System.out.println("          ,-----' |    _ )_)<'~_`)   ) )~)      /             \\\\");
+        System.out.println("          | //  : |  -'      )^ \\\\  __(O(   ___| MUHAHAHAAH!!!  |");
+        System.out.println("          | //  : |   ---    >__;` (~( )_)  `-.  mmWAHAHA!!!!!  |");
+        System.out.println("          | //  : |  -._     /\\_\\   \\O\\        \\    YEAH!!!    /");
+        System.out.println("          `-----._|     __  /__( \\|  )_)        `--_________--'");
+        System.out.println("           _/___\\_    //)_`/( (| ||]");
+        System.out.println("     _____[_______]_[~~-_ (.L)O) ||");
+        System.out.println("    [____________________]' (_(,/(~(");
+        System.out.println("      ||| /          )~)  ,___,'./\\O\\\\");
+        System.out.println("      ||| \\         (O(|,'______|( )_)");
+        System.out.println("      ||| /          )_) I==||  __");
+        System.out.println("      ||| \\       __/_||  __||__)~)");
+        System.out.println("  -----||-/------`-._/||-o-_o__(O(--  __");
+        System.out.println("    ~~~~~'   ____     __  /_O_/.\\_\\   \\~\\\\");
+        System.out.println("_____________________________________________________");
+        
     	System.out.println("Usage:");
     	System.out.println("create initial_deposit_amount");
     	System.out.println("getbalance account_number");
