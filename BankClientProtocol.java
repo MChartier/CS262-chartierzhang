@@ -87,8 +87,7 @@ public class BankClientProtocol {
 	return output;
     }
 
-    public BankMessage makeMessage() 
-    		throws InputMismatchException {
+    public BankMessage makeMessage() {
     	/*BankMessage output = null;
 
     	// scan userInput string
@@ -135,11 +134,9 @@ public class BankClientProtocol {
     
                 int[] opcodes = {CREATE, DEPOSIT, WITHDRAW, 
                     GETBALANCE, CLOSE};
-                
-                BankClient.usage();
-                
+                                
                 do {
-                    userInput = (int) stdIn.next();
+                    userInput = stdIn.nextInt();
                 } while(!(userInput >=1 && userInput <= 5));
                 
                 int opcode = opcodes[userInput - 1];
