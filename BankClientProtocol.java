@@ -92,15 +92,16 @@ public class BankClientProtocol {
 
     	// scan userInput string
     	Scanner sc = new Scanner(userInput);
-    	int parameters[] = new int[1];
-    	
+    	int parameters[] = new int[2];
+	parameters[1] = 0;    
+	
     	// try to find operation name
     	String opcode = sc.next();
 
     	if (opcode.equals("create")) {
     		// case CREATE
     		parameters[0] = sc.nextInt();
-    		output = buildMessage(0x10, parameters[0]);
+    		output = buildMessage(0x10, parameters);
     	}
     	else if (opcode.equals("deposit")) {
     		// case DEPOSIT:
@@ -117,12 +118,12 @@ public class BankClientProtocol {
     	else if (opcode.equals("getbalance")) {
     		// case GETBALANCE:
     		parameters[0] = sc.nextInt();
-    		output = buildMessage(0x40, parameters[0]); 
+    		output = buildMessage(0x40, parameters); 
     	}
     	else if (opcode.equals("close")) {
     		// case CLOSE:
     		parameters[0] = sc.nextInt();
-    		output = buildMessage(0x50, parameters[0]);
+    		output = buildMessage(0x50, parameters);
     	}
     	else {
     		throw new InputMismatchException();
@@ -131,17 +132,6 @@ public class BankClientProtocol {
         return output;
     }
 
-
-    
-    private BankMessage buildMessage(int opcode, int parameter) {
-    int[] parameters = new int[1];
-    parameters[0] = parameter;
-
-	return new BankMessage(PROTOCOL_VERSION, 
-			   opcode, 
-			   404, 
-			   parameters);
-    }
 
 
     private BankMessage buildMessage(int opcode, int parameter[]) {

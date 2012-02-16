@@ -7,14 +7,14 @@ public class BankClient {
 	
     public static void main(String[] args) 
 	throws IOException, UnknownHostException, Exception {
-    
+   
 	// check for hostname
-	if (args.length != 2) {
+	if (args.length != 1){
 	    System.out.println("Usage: java BankClient hostname");
 	    System.exit(1);
 	}
     
-	String hostname = args[1];
+	String hostname = args[0];
     	
 	// set up socket for network I/O
 	Socket clientSocket = null;
@@ -39,6 +39,7 @@ public class BankClient {
 	}
 
 	// display usage
+	welcome();
 	usage();
 	
 	// set up command line input
@@ -72,7 +73,7 @@ public class BankClient {
 	clientSocket.close();
     }	
     
-    public static void usage() {
+    public static void welcome() {
     	System.out.println("Welcome to DistribCo Banking");
         System.out.println("                              )");
         System.out.println("                         )   __    (");
@@ -101,7 +102,8 @@ public class BankClient {
         System.out.println("  -----||-/------`-._/||-o-_o__(O(--  __");
         System.out.println("    ~~~~~'   ____     __  /_O_/.\\_\\   \\~\\\\");
         System.out.println("_____________________________________________________");
-        
+   }
+   public static void usage() {
     	System.out.println("Usage:");
     	System.out.println("create initial_deposit_amount");
     	System.out.println("getbalance account_number");
