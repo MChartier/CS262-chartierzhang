@@ -80,8 +80,8 @@ public class BankServerProtocol {
 				output = buildMessage(0x31);
 			}
 
-			// INVALID DEPOSIT AMOUNT
-			else if(secondParam < 0) {
+			// INVALID WITHDRAW AMOUNT
+			else if(secondParam < 0 || secondParam > balance[firstParam]) {
 				output = buildMessage(0x32);
 			}
 

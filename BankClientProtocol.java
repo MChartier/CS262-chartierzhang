@@ -88,46 +88,7 @@ public class BankClientProtocol {
 	}
 
 	public BankMessage makeMessage() {
-		/*BankMessage output = null;
-
-    	// scan userInput string
-    	Scanner sc = new Scanner(userInput);
-    	int parameters[] = new int[2];
-	parameters[1] = 0;    
-
-    	// try to find operation name
-    	String opcode = sc.next();
-
-    	if (opcode.equals("create")) {
-    		// case CREATE
-    		parameters[0] = sc.nextInt();
-    		output = buildMessage(0x10, parameters);
-    	}
-    	else if (opcode.equals("deposit")) {
-    		// case DEPOSIT:
-    		parameters[0] = sc.nextInt();
-    		parameters[1] = (int) sc.nextDouble() * 100;
-    		output = buildMessage(0x20, parameters);
-    	}
-    	else if (opcode.equals("withdraw")) {
-    		// case WITHDRAW:
-    		parameters[0] = sc.nextInt();
-    		parameters[1] = (int) sc.nextDouble() * 100;
-    		output = buildMessage(0x30, parameters);
-    	}
-    	else if (opcode.equals("getbalance")) {
-    		// case GETBALANCE:
-    		parameters[0] = sc.nextInt();
-    		output = buildMessage(0x40, parameters); 
-    	}
-    	else if (opcode.equals("close")) {
-    		// case CLOSE:
-    		parameters[0] = sc.nextInt();
-    		output = buildMessage(0x50, parameters);
-    	}
-    	else {
-    		throw new InputMismatchException();
-    	} */
+    
 		Scanner stdIn = new Scanner(System.in);
 		int userInput;
 
@@ -143,26 +104,26 @@ public class BankClientProtocol {
 		int[] parameters = new int[2];
 		
 		// create a pattern only accepting positive numbers with at most 2 decimal places
-		Pattern dollar = new Pattern.compile("^\$?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}[0-9]{0,}(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$");
+		Pattern dollar = Pattern.compile("^\$?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}[0-9]{0,}(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$");
 		
 		// populate parameters list
 		switch(opcode) {
 		case CREATE:
 			System.out.println("How much for initial deposit?");
-					parameters[0] = (int) (stdIn.nextDouble() * 100);
-					break;
+			parameters[0] = (int) (stdIn.nextDouble() * 100);
+			break;
 
 		case DEPOSIT:
 			System.out.println("Which account?");
 			parameters[0] = stdIn.nextInt();
-			System.out.println("How much?");
+			System.out.println("How much to deposit?");
 			parameters[1] = (int) (stdIn.nextDouble() * 100);
 			break;
 
 		case WITHDRAW:
 			System.out.println("Which account?");
 			parameters[0] = stdIn.nextInt();
-			System.out.println("How much?");
+			System.out.println("How much to withdraw?");
 			parameters[1] = (int) (stdIn.nextDouble() * 100);
 			break;
 
