@@ -88,7 +88,7 @@ public class BankClientProtocol {
     }
 
     public BankMessage makeMessage() 
-    		throws InputMismatchException, NoSuchElementException {
+    		throws InputMismatchException {
     	/*BankMessage output = null;
 
     	// scan userInput string
@@ -140,9 +140,9 @@ public class BankClientProtocol {
                 
                 do {
                     userInput = stdIn.next();
-                } while(!(uInput >=1 && uInput <= 5));
+                } while(!(userInput >=1 && userInput <= 5));
                 
-                int opcode = opcodes[uInput - 1];
+                int opcode = opcodes[userInput - 1];
                 int[] parameters = null;
                 
                 // populate parameters list
