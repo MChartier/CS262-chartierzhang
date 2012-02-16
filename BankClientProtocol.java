@@ -139,7 +139,7 @@ public class BankClientProtocol {
                 BankClient.usage();
                 
                 do {
-                    userInput = stdIn.next();
+                    userInput = (int) stdIn.next();
                 } while(!(userInput >=1 && userInput <= 5));
                 
                 int opcode = opcodes[userInput - 1];
