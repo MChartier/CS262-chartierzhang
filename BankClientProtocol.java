@@ -142,7 +142,7 @@ public class BankClientProtocol {
                 } while(!(uInput >=1 && uInput <= 5));
                 
                 int opcode = opcodes[uInput - 1];
-                int[] parameters = null;
+                int[] parameters = new int[2];
                 
                 // populate parameters list
                 switch(opcode) {

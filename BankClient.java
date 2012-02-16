@@ -52,7 +52,7 @@ public class BankClient {
 	String responseMessage;
 	
 	// read user input and send to client server
-	while((outMessage = makeMessage()) != null) {
+	while((outputMessage = bp.makeMessage()) != null) {
 	    try {
 	    	//outputMessage = bp.makeMessage(userInput);
             System.out.println("Sending message to server...");
