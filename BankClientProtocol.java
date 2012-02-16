@@ -39,7 +39,7 @@ public class BankClientProtocol {
 		case DEPOSIT:
 		case WITHDRAW:
 			// SUCCESSFUL DEPOSIT OR WITHDRAW - RETURN BALANCE
-			double balance = (double) (firstParam / 100);
+			double balance = ((double) firstParam) / 100;
 			output = String.format("Success: Your balance is now $%.2f",balance);
 			break;
 
@@ -63,7 +63,7 @@ public class BankClientProtocol {
 
 		case GETBALANCE:
 			// SUCCESSFUL BALANCE QUERY
-			double bal = (double) (firstParam / 100);
+			double bal = ((double) firstParam) / 100;
 			output = String.format("Your balance is $%.2f",  bal);
 			break;
 
