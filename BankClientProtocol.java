@@ -1,6 +1,8 @@
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.regex.*;
+
 
 public class BankClientProtocol {
 	private int PROTOCOL_VERSION = 1;
@@ -104,12 +106,15 @@ public class BankClientProtocol {
 		int[] parameters = new int[2];
 		
 		// create a pattern only accepting positive numbers with at most 2 decimal places
-		Pattern dollar = Pattern.compile("^\$?([1-9]{1}[0-9]{0,2}(\,[0-9]{3})*(\.[0-9]{0,2})?|[1-9]{1}[0-9]{0,}(\.[0-9]{0,2})?|0(\.[0-9]{0,2})?|(\.[0-9]{1,2})?)$");
+		Pattern dollar = Pattern.compile("^\\$?([1-9]{1}[0-9]{0,2}(\\,[0-9]{3})*(\\.[0-9]{0,2})?|[1-9]{1}[0-9]{0,}(\\.[0-9]{0,2})?|0(\\.[0-9]{0,2})?|(\\.[0-9]{1,2})?)$");
 		
 		// populate parameters list
 		switch(opcode) {
 		case CREATE:
-			System.out.println("How much for initial deposit?");
+			do {
+				System.out.println("How much for initial deposit?");
+			} 
+			while ((stdIn.hasNext(dollar)) == false);
 			parameters[0] = (int) (stdIn.nextDouble() * 100);
 			break;
 
