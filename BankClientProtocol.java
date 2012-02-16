@@ -86,7 +86,7 @@ public class BankClientProtocol {
 	return output;
     }
 
-    public BankMessage processInput(String userInput) 
+    public BankMessage makeMessage() 
     		throws InputMismatchException, NoSuchElementException {
     	/*BankMessage output = null;
 
@@ -135,11 +135,7 @@ public class BankClientProtocol {
                 int[] opcodes = {CREATE, DEPOSIT, WITHDRAW, 
                     GETBALANCE, CLOSE};
                 
-                System.out.println("1. Create account");
-                System.out.println("2. Deposit Money");
-                System.out.println("3. Withdraw Money");
-                System.out.println("4. Get Balance");
-                System.out.println("5. Close account");
+                BankClient.usage();
                 
                 do {
                     uInput = stdIn.nextInt();

@@ -52,9 +52,9 @@ public class BankClient {
 	String responseMessage;
 	
 	// read user input and send to client server
-	while((userInput = stdIn.readLine()) != null) {
+	while((outMessage = makeMessage()) != null) {
 	    try {
-	    	outputMessage = bp.processInput(userInput);
+	    	//outputMessage = bp.makeMessage(userInput);
             System.out.println("Sending message to server...");
             outputMessage.writeMessage(out);
             
@@ -110,11 +110,18 @@ public class BankClient {
     
    public static void usage() {
     	System.out.println("Usage:");
+       /*
     	System.out.println("create initial_deposit_amount");
     	System.out.println("getbalance account_number");
     	System.out.println("deposit account_number amount");
     	System.out.println("withdraw account_number amount");
     	System.out.println("close account_number");
+        */
+       System.out.println("1. Create account");
+       System.out.println("2. Deposit Money");
+       System.out.println("3. Withdraw Money");
+       System.out.println("4. Get Balance");
+       System.out.println("5. Close account");
     	System.out.println("------------------------------------");
     	System.out.println("Please include all arguments and format amounts in whole dollars and cents (i.e 110.23)");
     	
