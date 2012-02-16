@@ -15,18 +15,18 @@ public class BankClient {
     
 	String hostname = args[1];
     	
+    	
 	// set up socket for network I/O
 	Socket clientSocket = null;
+	PrintWriter out = null;
+	BufferedReader in = null;
 	
-	DataOutputStream out = null;
-	DataInputStream in = null;
-
 	try {
 	    clientSocket = new Socket(hostname, portNumber);
 		
 	    // establish communication with server
-	    out = new DataOutputStream(clientSocket.getOutputStream());
-	    in = new DataInputStream(clientSocket.getInputStream());
+	    DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream(), true);
+	    DataInputStream in = new DataInputStream(clientSocket.getInputStream());
 	} 
 	catch (UnknownHostException e) {
 	    System.err.println("Invalid hostname");
@@ -38,12 +38,13 @@ public class BankClient {
 	}
 
 	// display usage
-	usage();
+	this.usage();
 	
 	// set up command line input
 	BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
 	String userInput;
 	
+
 	// set up protocol to send/receive server messages
 	BankClientProtocol bp = new BankClientProtocol();
 	BankMessage inputMessage, outputMessage;
@@ -58,11 +59,12 @@ public class BankClient {
 		responseMessage = bp.receiveMessage(inputMessage);
 		System.out.println(responseMessage);
 	    }
-	    catch (NoSuchElementException e) {
-	    	usage();
+	    catch (NoSuchElementException e){
+	    	this.usage();
+	    	
 	    }
 	    catch (InputMismatchException e) {
-	    	usage();
+	    	this.usage();
 	    }
 	}
 	
@@ -71,9 +73,10 @@ public class BankClient {
 	in.close();
 	stdIn.close();
 	clientSocket.close();
+
     }	
     
-    public static void usage() {
+    public static void usage(void) {
     	System.out.println("Welcome to DistribCo Banking");
     	System.out.println("Usage:");
     	System.out.println("create initial_deposit_amount");
@@ -85,4 +88,5 @@ public class BankClient {
     	System.out.println("Please include all arguments and format amounts in whole dollars and cents (i.e 110.23)");
     	
     }
+    
 }

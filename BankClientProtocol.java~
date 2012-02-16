@@ -23,22 +23,26 @@ public class BankClientProtocol {
 	switch (opcode) {
 	case CREATE:
 		// SUCCESSFUL CREATE
-	    output = "You have created account "+ firstParam;
+		output = new String 
+				"You have created account "+ firstParam;
 		break;
 	case 0x11:
 	    // INVALID INITIAL DEPOSIT
-		output = "Error: Your deposit amount was not valid";
+		output = new String 
+				"Error: Your deposit amount was not valid";
 	    break;
 	case 0x12:
 	    // ACCOUNT NUMBERS EXHAUSTED
-		output = "Error: Unable to create account";
+		output = new String
+				"Error: Unable to create account";
 	    break;
 	    
 	case DEPOSIT:
 	case WITHDRAW:
 	    // SUCCESSFUL DEPOSIT OR WITHDRAW - RETURN BALANCE
 		double balance = (double) firstParam / 100;
-		output = new String.format("Success: Your balance is now $%.2f",balance);
+		output = new String.format(
+				"Success: Your balance is now $%.2f",balance);
 		break;
 
 	case 0x21:
@@ -46,17 +50,20 @@ public class BankClientProtocol {
 	case 0x41:
 	case 0x51:
 	    // INVALID ACCOUNT NUMBER
-		output = "Error: Your account number was not valid";
+		output = new String
+				"Error: Your account number was not valid";
 	    break;
 
 	case 0x22:
 	    // INVALID DEPOSIT AMOUNT
-		output = "Error: Your deposit amount was not valid";
+		output = new String
+				"Error: Your deposit amount was not valid";
 	    break;
 
 	case 0x32:
 	    // INVALID WITHDRAW AMOUNT
-		output = "Error: Your withdrawal amount was not valid";
+		output = new String 
+				"Error: Your withdrawal amount was not valid";
 	    break;
 
 	case GETBALANCE:
@@ -66,16 +73,19 @@ public class BankClientProtocol {
 		break;
 	case 0x42:
 		// UNABLE TO GET BALANCE - MISC ERROR
-		output = "Error: Unable to get balance";
+		output = String
+				"Error: Unable to get balance";
 		break;
 	  
 	case CLOSE:
 		// SUCCESSFUL ACC CLOSE
-		output = "Success: You closed account #" + firstParam;
+		output = new String
+				"Success: You closed account #" + firstParam;
 		break;
 	case 0x52:
 		// UNABLE TO CLOSE - MISC ERROR
-		output = "Error: Unable to close account #" + firstParam;
+		output = new String 
+				"Error: Unable to close account #" + firstParam;
 		break;
 
 	default:

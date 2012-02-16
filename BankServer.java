@@ -30,7 +30,7 @@ public class BankServer {
 	DataInputStream in = new DataInputStream(clientSocket.getInputStream());
 
 	// initiate conversation with client (one at a time for now)
-	BankProtocol bp = new BankProtocol();
+	BankServerProtocol bp = new BankServerProtocol();
 	BankMessage inputMessage, outputMessage;
 
 	while((inputMessage = BankMessage.readMessage(in)) != null) {
