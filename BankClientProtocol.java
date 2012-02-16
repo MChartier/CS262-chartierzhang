@@ -113,9 +113,11 @@ public class BankClientProtocol {
 		case CREATE:
 			do {
 				System.out.println("How much for initial deposit?");
-				parameters[0] = (int) (stdIn.nextDouble() * 100);
+				String input = stdIn.next();
 			} 
-			while ((stdIn.hasNext(dollar)) == false);
+			while ((dollar.matcher(input).matches()) == false);
+			parameters[0] = (int) (Double.parseDouble(input) * 100);
+
 			break;
 
 		case DEPOSIT:
