@@ -107,13 +107,14 @@ public class BankClientProtocol {
 		
 		// create a pattern only accepting positive numbers with at most 2 decimal places
 		Pattern dollar = Pattern.compile("^\\$?([1-9]{1}[0-9]{0,2}(\\,[0-9]{3})*(\\.[0-9]{0,2})?|[1-9]{1}[0-9]{0,}(\\.[0-9]{0,2})?|0(\\.[0-9]{0,2})?|(\\.[0-9]{1,2})?)$");
+		String input = null;
 		
 		// populate parameters list
 		switch(opcode) {
 		case CREATE:
 			do {
 				System.out.println("How much for initial deposit?");
-				String input = stdIn.next();
+				input = stdIn.next();
 			} 
 			while ((dollar.matcher(input).matches()) == false);
 			parameters[0] = (int) (Double.parseDouble(input) * 100);
