@@ -65,7 +65,7 @@ public class BankClient {
             System.out.println(responseMessage);
 	    }
 	    catch (Exception e) {
-	    	usage();
+	    	//usage();
 	    }
 
 	}
