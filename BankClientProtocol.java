@@ -19,7 +19,8 @@ public class BankClientProtocol {
 
     int opcode = inputMessage.opcode;
 	int firstParam = inputMessage.parameters[0];
-
+        double balance;
+        
 	switch (opcode) {
 	case CREATE:
 		// SUCCESSFUL CREATE
@@ -37,7 +38,7 @@ public class BankClientProtocol {
 	case DEPOSIT:
 	case WITHDRAW:
 	    // SUCCESSFUL DEPOSIT OR WITHDRAW - RETURN BALANCE
-		double balance = (double) firstParam / 100;
+		balance = (double) firstParam / 100;
 		output = String.format("Success: Your balance is now $%.2f",balance);
 		break;
 
@@ -129,7 +130,7 @@ public class BankClientProtocol {
     		throw new InputMismatchException();
     	} */
                 Scanner stdIn = new Scanner(System.in);
-                int uInput;
+                int userInput;
                 
     
                 int[] opcodes = {CREATE, DEPOSIT, WITHDRAW, 
@@ -138,7 +139,7 @@ public class BankClientProtocol {
                 BankClient.usage();
                 
                 do {
-                    uInput = stdIn.nextInt();
+                    userInput = stdIn.next();
                 } while(!(uInput >=1 && uInput <= 5));
                 
                 int opcode = opcodes[uInput - 1];
