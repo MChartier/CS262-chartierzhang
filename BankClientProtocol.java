@@ -124,15 +124,25 @@ public class BankClientProtocol {
 		case DEPOSIT:
 			System.out.println("Which account?");
 			parameters[0] = stdIn.nextInt();
-			System.out.println("How much to deposit?");
-			parameters[1] = (int) (stdIn.nextDouble() * 100);
+			
+			do {
+				System.out.println("How much to deposit?");
+				input = stdIn.next();
+			} 
+			while ((dollar.matcher(input).matches()) == false);
+			parameters[1] = (int) (Double.parseDouble(input) * 100);
 			break;
 
 		case WITHDRAW:
 			System.out.println("Which account?");
 			parameters[0] = stdIn.nextInt();
-			System.out.println("How much to withdraw?");
-			parameters[1] = (int) (stdIn.nextDouble() * 100);
+			
+			do {
+				System.out.println("How much to withdraw?");
+				input = stdIn.next();
+			} 
+			while ((dollar.matcher(input).matches()) == false);
+			parameters[1] = (int) (Double.parseDouble(input) * 100);
 			break;
 
 		case GETBALANCE:
