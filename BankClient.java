@@ -59,7 +59,7 @@ public class BankClient {
 				// display confirmation or errors
 				responseMessage = bp.receiveMessage(inputMessage);
 				System.out.println(responseMessage);
-
+				usage();
 			}
 			catch (InputMismatchException e) {
 				// yell at user if they tried to give bad data
