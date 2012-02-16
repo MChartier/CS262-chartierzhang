@@ -125,7 +125,7 @@ public class BankServerProtocol {
     }
 
     private BankMessage buildMessage(int opcode) {
-	int[] parameters = null;
+	int[] parameters = new int[1];
 
 	return new BankMessage(PROTOCOL_VERSION, 
 			   opcode, 
