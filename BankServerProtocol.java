@@ -19,7 +19,7 @@ public class BankServerProtocol {
     // we do not reclaim account numbers
     private static int numAccounts;
 
-    public BankProtocol() {
+    public BankServerProtocol() {
 	balance = new int[MAX_ACCOUNTS];
 	accountState = new boolean[MAX_ACCOUNTS];
     }
